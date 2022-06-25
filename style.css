@@ -19,7 +19,7 @@
 }
 
 .displayNone {
-  display: none;
+  display: none !important;
 }
 
 #magnetised-line-x,
@@ -36,9 +36,105 @@
   height: 2px;
   transform: translate3d(0px, -50%, 0px);
   left: 0px;
-  background: linear-gradient(to right, #333 50%, rgba(255, 255, 255, 0.5) 50%);
+  background: linear-gradient(to right, #333 50%, #FFF 50%);
   background-size: 20px 100%;
 }
 #magnetised-line-r {
   height: 300%;
+}
+
+.dragBullet {
+  position: absolute;
+  display: inline-block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate3d(-50%, -50%, 0px);
+  cursor: pointer;
+  border: solid 2px #FFF;
+  background-color: #333;
+  box-shadow:
+    0 0px 0.1rem rgba(0, 0, 0, 0.35),
+    0 0px 0.2rem rgba(0, 0, 0, 0.3),
+    0 0px 0.4rem rgba(0, 0, 0, 0.25);
+}
+.dragBullet.dragBulletRT {
+  background-color: yellow;
+}
+.dragBulletTL {
+  top: 0px;
+  left: 0px;
+}
+.dragBulletT {
+  top: 0px;
+  left: 50%;
+}
+.dragBulletTR {
+  top: 0px;
+  left: 100%;
+}
+.dragBulletL {
+  top: 50%;
+  left: 0px;
+}
+.dragBulletR {
+  top: 50%;
+  left: 100%;
+}
+.dragBulletBL {
+  top: 100%;
+  left: 0px;
+}
+.dragBulletB {
+  top: 100%;
+  left: 50%;
+}
+.dragBulletBR {
+  top: 100%;
+  left: 100%;
+}
+.dragBulletRT {
+  top: -50px;
+  left: 50%;
+}
+.drag-border-box {
+  --border-width: 1px;
+  --border-length: calc(var(--border-width) * 8);
+
+  position: relative;
+  z-index: 1000;
+  display: inline-block;
+  transform-origin: center center;
+  animation: border-dance 0.7s infinite linear;
+  transform: translate3d(-50%, -50%, 0px);
+
+  background:
+    linear-gradient(to right, #333 50%, #FFF 50%),
+    linear-gradient(to right, #333 50%, #FFF 50%),
+    linear-gradient(to top, #333 50%, #FFF 50%),
+    linear-gradient(to top, #333 50%, #FFF 50%);
+  background-repeat:
+    repeat-x,
+    repeat-x,
+    repeat-y,
+    repeat-y;
+  background-size:
+    var(--border-length) var(--border-width),
+    var(--border-length) var(--border-width),
+    var(--border-width) var(--border-length),
+    var(--border-width) var(--border-length);
+  background-position:
+    0% 0%,
+    0% 100%,
+    0% 0%,
+    100% 0%;
+}
+@keyframes border-dance {
+  100% {
+    background-position:
+      var(--border-length) 0%,
+      calc(var(--border-length) * -1) 100%,
+      0% calc(var(--border-length) * -1),
+      100% var(--border-length);
+  }
 }

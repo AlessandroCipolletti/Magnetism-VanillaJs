@@ -32,7 +32,7 @@ let canGoOutside = true;
 // DOM REF
 let mainWrapper;
 let magnetisedLineX, magnetisedLineY, magnetisedLineR;
-
+let dragBox;
 
 
 // UPDATE MAGNETISM COORDS WHENEVER NECESSARY
@@ -231,6 +231,30 @@ const getMagnetismCoordsBottomForElement = (elementId) => {
 let dragStartX = -1, dragStartY = -1;
 let elementCoordXAtMouseDown = -1, elementCoordYAtMouseDown = -1;
 
+const updateDragBox = (element) => {
+  dragBox.style.width = element.style.width;
+  dragBox.style.height = element.style.height;
+  dragBox.style.left = element.style.left;
+  dragBox.style.top = element.style.top;
+  dragBox.classList.remove('displayNone');
+}
+
+const onElementSelect = (element, elementId) => {
+  currentSelectedElement = element;
+  currentSelectedId = elementId;
+  updateMagnetismCoordsIfNeeded();
+  updateDragBox(element);
+};
+
+const deselectAll = (event) => {
+  preventDefault(event);
+  if (currentSelectedId) {
+    currentSelectedId = false;
+    currentSelectedId = false;
+    dragBox.classList.add('displayNone');
+  }
+};
+
 const onElementPointerDown = (event, elementId) => {
   preventDefault(event);
 
@@ -239,9 +263,7 @@ const onElementPointerDown = (event, elementId) => {
     if (!element.classList.contains('active')) {
       return;
     }
-    currentSelectedElement = element;
-    currentSelectedId = elementId;
-    updateMagnetismCoordsIfNeeded();
+    onElementSelect(element, elementId);
   }
 
   const element = draggableElements.find(e => e.id === elementId);
@@ -280,6 +302,7 @@ const onPointerMove = (event) => {
   element.y = newElementY;
   currentSelectedElement.style.left = `${newElementX}%`;
   currentSelectedElement.style.top = `${newElementY}%`;
+  updateDragBox(currentSelectedElement);
 
   if (magnetisedCoordX !== false) {
     magnetisedLineX.classList.remove('displayNone');
@@ -356,6 +379,7 @@ const initElements = () => {
 
 const initDom = () => {
   mainWrapper = document.querySelector('#mainWrapper');
+  dragBox = document.querySelector('.drag-border-box');
   magnetisedLineX = document.querySelector('#magnetised-line-x');
   magnetisedLineY = document.querySelector('#magnetised-line-y');
   magnetisedLineR = document.querySelector('#magnetised-line-r');
@@ -365,6 +389,10 @@ const initDom = () => {
     width: ${width}%;
     height: ${height}%;
   `;
+  mainWrapper.addEventListener('pointerdown', deselectAll);
+  dragBox.addEventListener('pointerdown', (event) => {
+    onElementPointerDown(event, currentSelectedId);
+  });
   onResize()
 };
 
