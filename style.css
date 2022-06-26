@@ -11,8 +11,8 @@
   position: absolute;
 }
 #mainWrapper > div.element {
-  transform: translate3d(-50%, -50%, 0px);
   opacity: 0.3;
+  transform-origin: center center;
 }
 #mainWrapper > div.active {
   opacity: 1;
@@ -58,52 +58,50 @@
     0 0px 0.2rem rgba(0, 0, 0, 0.3),
     0 0px 0.4rem rgba(0, 0, 0, 0.25);
 }
-.dragBullet.dragBulletRT {
-  background-color: yellow;
-}
-.dragBulletTL {
+#dragBulletTL {
   top: 0px;
   left: 0px;
 }
-.dragBulletT {
+#dragBulletT {
   top: 0px;
   left: 50%;
 }
-.dragBulletTR {
+#dragBulletTR {
   top: 0px;
   left: 100%;
 }
-.dragBulletL {
+#dragBulletL {
   top: 50%;
   left: 0px;
 }
-.dragBulletR {
+#dragBulletR {
   top: 50%;
   left: 100%;
 }
-.dragBulletBL {
+#dragBulletBL {
   top: 100%;
   left: 0px;
 }
-.dragBulletB {
+#dragBulletB {
   top: 100%;
   left: 50%;
 }
-.dragBulletBR {
+#dragBulletBR {
   top: 100%;
   left: 100%;
 }
-.dragBulletRT {
+#dragBulletRT {
   top: -50px;
   left: 50%;
+  background-color: yellow;
 }
 .drag-border-box {
   --border-width: 1px;
   --border-length: calc(var(--border-width) * 8);
 
   position: relative;
-  z-index: 1000;
   display: inline-block;
+  z-index: 1000;
   transform-origin: center center;
   animation: border-dance 0.7s infinite linear;
   transform: translate3d(-50%, -50%, 0px);
