@@ -350,8 +350,8 @@ const handleResizeStart = (event, oppositeBullet, selectedResize) => {
   preventDefault(event);
   initialResizeState = JSON.parse(JSON.stringify(draggableElements[currentSelectedId]));
   const bulletRect = getDomRect(event.target);
-  resizeAngleCosFraction = Math.cos(draggableElements[currentSelectedId].r);
-  resizeAngleSinFraction = Math.sin(draggableElements[currentSelectedId].r);
+  resizeAngleCosFraction = round(Math.cos(convertAngleDegToRad(draggableElements[currentSelectedId].r)), defaultDecimals);
+  resizeAngleSinFraction = round(Math.sin(convertAngleDegToRad(draggableElements[currentSelectedId].r)), defaultDecimals);
   const [touchX, touchY] = getEventRelativeCoords(event);
   [startDotX, startDotY] = getBulletCoords(event.target);
   [oppositeX, oppositeY] = getBulletCoords(oppositeBullet);
@@ -695,8 +695,8 @@ const initDom = () => {
   const width = 60 + getRandomNumber(30, 0);
   const height = 60 + getRandomNumber(30, 0);
   mainWrapper.style.cssText = `
-    width: ${width}%;
-    height: ${height}%;
+    width: ${width}vw;
+    height: ${height}vh;
   `;
   onResize()
 };

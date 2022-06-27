@@ -1,8 +1,9 @@
 #mainWrapper {
   border: solid 1px black;
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  position: relative;
+  display: inline-block;
+  left: 50vw;
+  top: 50vh;
   transform: translate3d(-50%, -50%, 0px);
   overflow: hidden;
 }

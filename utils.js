@@ -168,6 +168,10 @@ function getAngleDegBetweenTwoPoints(x1, y1, x2, y2) {
   return convertAngleRadToDeg(getAngleRadBetweenTwoPoints(x1, y1, x2, y2));
 }
 
+function convertAngleDegToRad(deg) {
+  return deg * Math.PI / 180;
+}
+
 function getAngleRadBetweenTwoPoints(x1, y1, x2, y2) {
   const m1 = x2 - x1;
   const m2 = y2 - y1;
